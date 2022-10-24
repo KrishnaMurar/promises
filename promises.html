@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+    <script>
+            const Posts =[
+                {title:'Post One',body:'This is post one'},
+                {title:'Post Two',body:'This is Post two'}
+            ];
+
+        function getPosts(){
+            setTimeout(() => {
+                let output = '';
+                Posts.forEach((post,index) => {
+                    output += `<li> ${post.title}</li>`;
+                })
+                document.body.innerHTML = output;
+            },1000);
+        }
+
+        function createPost(post){
+            return new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    Posts.push(post);
+
+                    const error = false;
+                    if(!error){
+                        resolve();
+                    }
+                    else{
+                        reject('Error: Something went wrong');
+                    }
+                },2000);
+            })
+        }
+
+        function deletePost(post){
+            return new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    if(Posts.length>0){
+                        const lastelement =Posts.pop();
+                        resolve(lastelement);
+                    }
+                    else{
+                        reject('Array is Empty Now')
+                    }
+                    
+
+                },1000);
+            })
+        }
+
+
+        //  Promise 
+     /*   createPost({title:'Post three',body:'This is Post three'})
+        .then(() => {
+            getPosts()
+            deletePost().then(() =>{
+                getPosts();
+                deletePost().then(() => {
+                    getPosts();
+                    deletePost().then(() =>{
+                        getPosts();
+                    deletePost().then(() =>{})
+                   
+                    .catch((err) => {
+                        console.log('Inside catch Block',err)
+                    })
+                })
+            }) })
+        })
+        .catch(err => console.log(err));   */
+ 
+        //  promises All
+
+        const Promise1 = Promise.resolve('Hello World');
+        const Promise2 = 10;
+        const Promise3 = new Promise((resolve,reject) => 
+        setTimeout(resolve,2000,'Goodbye'));
+
+        Promise.all([Promise1,Promise2,Promise3]).then(values => console.log(values));
+
+
+
+    </script>
+</body>
+</html>
